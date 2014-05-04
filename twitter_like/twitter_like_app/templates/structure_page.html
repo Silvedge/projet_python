@@ -1,0 +1,40 @@
+{% load staticfiles %}
+<html>
+	<head>
+		<title>TWITTER-LIKE {% block title %}{% endblock %}</title>
+		<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+	</head>
+	
+	<a href="{% url 'twitter_like:Index' %}">Accueil</a>
+
+	<ul >
+		<li><a href="{% url 'twitter_like:Utilisateurs' %}">Utilisateurs</a></li>
+		{% if user_log.username %}
+		<li><a href="{% url 'twitter_like:twitter_likePage' user_log.username %}"> {{ user_log.username }}</a></li>
+		{% endif %}
+	</ul>
+	
+	{% if user_log.username %}
+		<form >
+			<input type="text" value="Recherche un utilisateur">
+			<button type="submit">Rechercher</button>
+		</form>
+		<ul>
+			<li><a href="{% url 'twitter_like:ModifProfil' %}">Paramètres</a></li>
+			<!--li><a href="#">Contact</a></li-->
+			<li><a href="{% url 'twitter_like:Logout' %}">Se déconnecter</a><li/>
+	{% else %}
+		<ul>
+			<li><a href="{% url 'twitter_like:Inscription' %}">S'inscrire</a></li>
+			<li><a href="{% url 'twitter_like:Login' %}">Se connecter</a></li>
+	{% endif %}
+	</ul>
+
+	<body>
+		{% block body %}{% endblock %}
+	</body>
+	
+	<footer>
+		{% block end %}{% endblock %}
+	</footer>
+</html>

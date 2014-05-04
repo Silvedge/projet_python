@@ -1,0 +1,35 @@
+{% extends 'structure_page.html' %}
+
+{% block title %}{{ user.username }}{% endblock %}
+
+{% block body %}
+	<div class="left">
+		<h2>@{{ user.username }}</h2>
+		<p class="information_profile center">
+			<a href="{% url 'twitter_like:PageMessage' user_log.username %}">
+				{{ user.first_name }} {{ user.last_name }}
+			</a><br/>
+			{{ user.description }}
+				
+			<ul>
+				<li>{{ count_messages }} messages</li>
+				<li>{{ count_abonnements }} abonnements</li>
+				<li>{{ count_abonnes }} abonn&eacute;s</li>
+			</ul>
+		<p/>
+		
+		{% if user_log == user %}
+			<a href="#">Nouveau messages</a>
+					
+			
+		{% endif %}
+		
+		<!-- Bouton "suivre", "ne plus suivre" -->
+		{% if abo and user_log != user %}
+			<a type='submit' value="StopSuivre" class="btn btn-danger" href="{% url 'twitter_like:DesbonnementUtilisateur' user.username %}">Ne plus suivre</a>
+		{% elif user_log != user %}
+			<a type='submit' value="Suivre" class="btn btn-info" href="{% url 'twitter_like:AbonnementUtilisateur' user.username %}">Suivre</a>
+		{% endif %}
+	</div>
+
+{% endblock %}

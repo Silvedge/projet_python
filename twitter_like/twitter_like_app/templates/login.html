@@ -1,0 +1,15 @@
+{% extends 'structure_page.html' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+	<h2 class="center">Se connecter</h2>
+	<form name="Login" method="POST" id="form" action="{% url 'twitter_like:Login' %}">
+		{{ formulaire }}
+		<p class="center">
+			<input type='reset' value="Effacer">
+			<input type='submit' value="Se connecter">
+		</p>
+		{% csrf_token %}
+	</form>
+{% endblock %}

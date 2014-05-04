@@ -1,0 +1,26 @@
+{% extends 'structure_page.html' %}
+
+{% block title %}Liste des utilisateurs{% endblock %}
+
+{% block body %}
+	<h2 class="center">Liste des utilisateurs</h2>
+	{% if users %}
+		<table class="tab_center">
+			<tr>
+			{% for user in users  %}
+				<td class="center cellpadding_30">
+					<a href="{% url 'twitter_like:Profil' user.username %}">
+				
+						{{ user.username | upper }}<br/>
+					</a>
+					{{ user.first_name }} {{ user.last_name }}
+				</td>
+				{% if user.pk|divisibleby:10 %}
+					</tr>
+				{% endif %}
+			{% endfor %}
+		</table>
+	{% else %}
+        <span>Pas d'utilisateur !</span>
+    {% endif %}
+{% endblock %}

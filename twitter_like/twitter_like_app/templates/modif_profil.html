@@ -1,0 +1,15 @@
+{% extends 'structure_page.html' %}
+
+{% block title %}Paramètre du profil{% endblock %}
+
+{% block body %}
+	<h2 class="center">Modifier son profil</h2>
+	<form id="form" name="ModifProfil" method="POST" id="ModifProfil" action="{% url 'twitter_like:ModifProfil' %}" >
+		{{ formulaire }}
+		<p class="center">
+			<input type='reset' value="Effacer">
+			<input type='submit' value="Enregistrer">
+		</p>
+		{% csrf_token %}
+	</form>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'structure_page.html' %}
+
+{% block title %}{{ user.username }}{% endblock %}
+
+{% block body %}
+	<div class="left">
+		<h2 id="top">{{ user.username }}</h2>
+		<p class="information_profil">
+			{{ user.first_name }} {{ user.last_name }}<br/>
+			{{ user.description }}
+		<p/>
+		{% if abo %}
+			<a type='submit' value="StopSuivre" class="btn btn-info" href="{% url 'twitter_like:DesbonnementUtilisateur' user.username %}">Ne plus suivre</a>
+		{% elif user_log != user %}
+			<a type='submit' value="Suivre" class="btn btn-default" href="{% url 'twitter_like:AbonnementUtilisateur' user.username %}">Suivre</a>
+		{% endif %}
+	</div>
+	<div>
+		<p>Messages</p>
+		{% for text in texts  %}
+		<p>
+			<span class="utilisateur"><a href="{% url 'twitter_like:Index' text.user.username %}">{{ text.user.username }}</a></span>
+			<span class="date">{{ text.date | date:'d M Y H:i' }}</span><br/>
+			<span class="texte">{{ text.text }}</span>
+		<p/>
+		{% empty %}
+		<p>Pas de messages à afficher</p>
+		{% endfor %}
+		<p><a href="">Retour en haut</a></p>
+	</div>
+{% endblock %}

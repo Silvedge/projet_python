@@ -1,0 +1,12 @@
+{% extends 'structure_page.html' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+	<h2 class="center">Formulaire d'inscription</h2>
+	<form id="form" name="Inscription" method="POST" id="Inscription" action="{% url 'twitter_like:Inscription' %}" >
+		{{ formulaire }}
+		<input type='submit' value="S'enregistrer">
+		{% csrf_token %}
+	</form>
+{% endblock %}	
